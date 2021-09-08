@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchContacts } from "../../redux/actions/contacts";
+import { addNewContact, fetchContacts } from "../../redux/actions/contacts";
 
 import Contact from "../../components/contact/Contact";
 
@@ -11,17 +11,17 @@ import { Button, CircularProgress } from "@material-ui/core";
 import MyModal from "../../components/ui/myModal/MyModal";
 import AddContact from "../../components/addContact/AddContact";
 
-function Contacts() {
+function Contacts({ openModal, setOpenModal }) {
   const dispatch = useDispatch();
-  const [openModal, setOpenModal] = useState();
+
   const { items, isLoaded } = useSelector(({ contacts }) => contacts);
 
   React.useEffect(() => {
     dispatch(fetchContacts());
   }, []);
 
-  const clickOpenModal = () => {
-    setOpenModal(true);
+  const handleAddContact = (newContact) => {
+    dispatch(addNewContact(newContact));
   };
 
   return (
@@ -36,7 +36,10 @@ function Contacts() {
         )}
       </div>
       <MyModal isOpen={openModal} setOpen={setOpenModal}>
-        <AddContact />
+        <AddContact
+          handleAddContact={handleAddContact}
+          setOpenModal={setOpenModal}
+        />
       </MyModal>
     </div>
   );

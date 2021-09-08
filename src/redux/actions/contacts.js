@@ -10,6 +10,19 @@ export const fetchContacts = () => async (dispatch) => {
   }
 };
 
+export const addNewContact = (contact) => async (dispatch) => {
+  const { name, number } = contact;
+  try {
+    const response = await axios.post("http://localhost:3001/contacts", {
+      name,
+      number,
+    });
+    dispatch(fetchContacts());
+  } catch (e) {
+    alert(e);
+  }
+};
+
 const setContacts = (data) => {
   return {
     type: "SET_CONTACTS",

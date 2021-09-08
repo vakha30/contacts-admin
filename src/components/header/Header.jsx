@@ -1,15 +1,19 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import { alpha, makeStyles } from "@material-ui/core/styles";
-
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import { useHistory } from "react-router";
-
-import { AppBar, Toolbar, InputBase } from "@material-ui/core";
+import {
+  AppBar,
+  Toolbar,
+  InputBase,
+  Button,
+  Typography,
+} from "@material-ui/core";
 
 import SearchIcon from "@material-ui/icons/Search";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 
-import { useDispatch } from "react-redux";
 import { logout } from "../../redux/actions/auth";
 
 const useStyles = makeStyles((theme) => ({
@@ -67,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Header({ isAuth, currentUser }) {
+function Header({ isAuth, currentUser, openAddModal }) {
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -81,6 +85,10 @@ function Header({ isAuth, currentUser }) {
     history.push("/login");
   };
 
+  const handleAddClick = () => {
+    openAddModal();
+  };
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -90,6 +98,13 @@ function Header({ isAuth, currentUser }) {
           </Typography>
           {isAuth ? (
             <>
+              <Button>
+                <AddCircleIcon
+                  fontSize="large"
+                  color="error"
+                  onClick={handleAddClick}
+                />
+              </Button>
               <div className={classes.search} style={{ marginRight: "15px" }}>
                 <div className={classes.searchIcon}>
                   <SearchIcon />

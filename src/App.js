@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, useHistory } from "react-router-dom";
 
@@ -12,6 +12,7 @@ import { login } from "./redux/actions/auth";
 function App() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [openModal, setOpenModal] = useState(false);
   const { isAuth, currentUser } = useSelector(({ auth }) => auth);
 
   React.useEffect(() => {
@@ -23,7 +24,6 @@ function App() {
         })
       );
     }
-
     if (isAuth) {
       history.push("/contacts");
     } else {
@@ -31,15 +31,23 @@ function App() {
     }
   }, [isAuth]);
 
+  const openAddModal = () => {
+    setOpenModal(true);
+  };
+
   return (
     <div className="App">
       <div className="container">
-        <Header isAuth={isAuth} currentUser={currentUser} />
+        <Header
+          isAuth={isAuth}
+          currentUser={currentUser}
+          openAddModal={openAddModal}
+        />
         <Route path="/login">
           <Login />
         </Route>
         <Route path="/contacts">
-          <Contacts />
+          <Contacts openModal={openModal} setOpenModal={setOpenModal} />
         </Route>
       </div>
     </div>
