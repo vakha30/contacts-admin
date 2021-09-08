@@ -1,0 +1,9 @@
+.addContact {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+}
+
+.addContact div {
+  margin-bottom: 5px;
+}

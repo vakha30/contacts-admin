@@ -11,7 +11,6 @@ import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 import Edit from "@material-ui/icons/Edit";
-import MyModal from "../ui/myModal/MyModal";
 
 const useStyles = makeStyles({
   root: {
@@ -48,7 +47,7 @@ function Contact({ id, name, number, handleDeleteContact, handleEditContact }) {
         <Button
           size="small"
           color="primary"
-          onClick={() => handleEditContact(id)}
+          onClick={() => handleEditContact({ id, name, number })}
         >
           <Edit />
         </Button>

@@ -29,7 +29,7 @@ function App() {
     } else {
       history.push("/login");
     }
-  }, [isAuth]);
+  }, [dispatch, history, isAuth]);
 
   const openAddModal = () => {
     setOpenModal(true);
