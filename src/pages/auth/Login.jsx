@@ -54,7 +54,7 @@ function Login() {
       <FormControl variant="outlined">
         <InputLabel htmlFor="component-outlined">Password</InputLabel>
         <OutlinedInput
-          id="component-outlined"
+          id="component-outlined2"
           type="password"
           value={password}
           onChange={handleChange}

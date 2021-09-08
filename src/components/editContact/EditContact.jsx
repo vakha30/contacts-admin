@@ -38,14 +38,14 @@ const EditContact = React.memo(function ({
   return (
     <div className={cl.addContact}>
       <TextField
-        id="standard-basic"
+        id="standard-basic3"
         name="name"
         label="Имя"
         value={contactEditName}
         onChange={handleChange}
       />
       <TextField
-        id="standard-basic"
+        id="standard-basic4"
         name="number"
         label="Телефон"
         value={contactEditNumber}

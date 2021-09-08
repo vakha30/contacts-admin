@@ -40,7 +40,7 @@ function AddContact({ handleAddContact, setOpenModal }) {
         onChange={handlehange}
       />
       <TextField
-        id="standard-basic"
+        id="standard-basic2"
         name="number"
         label="Телефон"
         value={contactAddNumber}

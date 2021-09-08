@@ -17,26 +17,39 @@ import MyModal from "../../components/ui/myModal/MyModal";
 import AddContact from "../../components/addContact/AddContact";
 import EditContact from "../../components/editContact/EditContact";
 
-function Contacts({ openModal, setOpenModal }) {
+function Contacts({ openModal, setOpenModal, searchValue }) {
   const dispatch = useDispatch();
   const [openEditModal, setOpenEditModal] = useState(false);
   const [editContactData, setEditContact] = useState({});
 
   const { items, isLoaded } = useSelector(({ contacts }) => contacts);
 
+  const filterItems = searchValue
+    ? items.filter(
+        (item) =>
+          item.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
+      )
+    : items;
+
   React.useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const handleAddContact = (newContact) => {
-    dispatch(addNewContact(newContact));
-  };
+  const handleAddContact = useCallback(
+    (newContact) => {
+      dispatch(addNewContact(newContact));
+    },
+    [dispatch]
+  );
 
-  const handleDeleteContact = (id) => {
-    if (window.confirm("Вы уверены?")) {
-      dispatch(deleteContact(id));
-    }
-  };
+  const handleDeleteContact = useCallback(
+    (id) => {
+      if (window.confirm("Вы уверены?")) {
+        dispatch(deleteContact(id));
+      }
+    },
+    [dispatch]
+  );
 
   const handleEditContact = useCallback((contact) => {
     setEditContact(contact);
@@ -56,7 +69,7 @@ function Contacts({ openModal, setOpenModal }) {
     <div className={cl.contactsPage}>
       <div className={cl.contacts}>
         {isLoaded ? (
-          items.map((item, index) => (
+          filterItems.map((item, index) => (
             <Contact
               key={`${item.id}_${index}`}
               {...item}

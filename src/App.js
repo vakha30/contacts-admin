@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, useHistory } from "react-router-dom";
 
@@ -13,6 +13,8 @@ function App() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [openModal, setOpenModal] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+
   const { isAuth, currentUser } = useSelector(({ auth }) => auth);
 
   React.useEffect(() => {
@@ -31,9 +33,9 @@ function App() {
     }
   }, [dispatch, history, isAuth]);
 
-  const openAddModal = () => {
+  const openAddModal = useCallback(() => {
     setOpenModal(true);
-  };
+  }, []);
 
   return (
     <div className="App">
@@ -42,12 +44,17 @@ function App() {
           isAuth={isAuth}
           currentUser={currentUser}
           openAddModal={openAddModal}
+          setSearchValue={setSearchValue}
         />
         <Route path="/login">
           <Login />
         </Route>
         <Route path="/contacts">
-          <Contacts openModal={openModal} setOpenModal={setOpenModal} />
+          <Contacts
+            openModal={openModal}
+            setOpenModal={setOpenModal}
+            searchValue={searchValue}
+          />
         </Route>
       </div>
     </div>

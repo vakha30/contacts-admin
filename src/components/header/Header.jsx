@@ -14,6 +14,8 @@ import {
 import SearchIcon from "@material-ui/icons/Search";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
+import useDebounce from "../../hooks/useDebounce";
+
 import { logout } from "../../redux/actions/auth";
 
 const useStyles = makeStyles((theme) => ({
@@ -71,9 +73,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Header({ isAuth, currentUser, openAddModal }) {
+function Header({ isAuth, currentUser, openAddModal, setSearchValue }) {
   const dispatch = useDispatch();
   const classes = useStyles();
+
+  const debouncedSearch = useDebounce(setSearchValue, 500);
 
   const history = useHistory();
 
@@ -87,6 +91,10 @@ function Header({ isAuth, currentUser, openAddModal }) {
 
   const handleAddClick = () => {
     openAddModal();
+  };
+
+  const handleChange = (e) => {
+    debouncedSearch(e.target.value);
   };
 
   return (
@@ -116,6 +124,7 @@ function Header({ isAuth, currentUser, openAddModal }) {
                     input: classes.inputInput,
                   }}
                   inputProps={{ "aria-label": "search" }}
+                  onChange={handleChange}
                 />
               </div>
               <span

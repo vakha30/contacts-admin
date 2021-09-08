@@ -21,7 +21,13 @@ const useStyles = makeStyles({
   },
 });
 
-function Contact({ id, name, number, handleDeleteContact, handleEditContact }) {
+const Contact = React.memo(function ({
+  id,
+  name,
+  number,
+  handleDeleteContact,
+  handleEditContact,
+}) {
   const classes = useStyles();
 
   return (
@@ -61,6 +67,6 @@ function Contact({ id, name, number, handleDeleteContact, handleEditContact }) {
       </CardActions>
     </Card>
   );
-}
+});
 
 export default Contact;
