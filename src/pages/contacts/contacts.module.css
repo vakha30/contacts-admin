@@ -1,0 +1,11 @@
+.contactsPage {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 15px;
+}
+
+.contacts {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

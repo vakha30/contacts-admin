@@ -1,0 +1,15 @@
+.login {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.login h1 {
+  margin-bottom: 10px;
+}
+
+.login div {
+  margin-bottom: 10px;
+}
