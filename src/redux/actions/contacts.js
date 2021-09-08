@@ -23,6 +23,15 @@ export const addNewContact = (contact) => async (dispatch) => {
   }
 };
 
+export const deleteContact = (id) => async (dispatch) => {
+  try {
+    const response = await axios.delete(`http://localhost:3001/contacts/${id}`);
+    dispatch(fetchContacts());
+  } catch (e) {
+    alert(e);
+  }
+};
+
 const setContacts = (data) => {
   return {
     type: "SET_CONTACTS",

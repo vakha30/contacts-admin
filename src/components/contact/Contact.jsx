@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Contact({ id, name, number }) {
+function Contact({ id, name, number, handleDeleteContact, handleEditContact }) {
   const classes = useStyles();
 
   return (
@@ -45,10 +45,18 @@ function Contact({ id, name, number }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => handleEditContact(id)}
+        >
           <Edit />
         </Button>
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => handleDeleteContact(id)}
+        >
           <DeleteIcon />
         </Button>
       </CardActions>

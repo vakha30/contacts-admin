@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { addNewContact, fetchContacts } from "../../redux/actions/contacts";
+import {
+  addNewContact,
+  fetchContacts,
+  deleteContact,
+} from "../../redux/actions/contacts";
 
 import Contact from "../../components/contact/Contact";
 
@@ -24,12 +28,27 @@ function Contacts({ openModal, setOpenModal }) {
     dispatch(addNewContact(newContact));
   };
 
+  const handleDeleteContact = (id) => {
+    if (window.confirm("Вы уверены?")) {
+      dispatch(deleteContact(id));
+    }
+  };
+
+  const handleEditContact = (id) => {
+    console.log(id);
+  };
+
   return (
     <div className={cl.contactsPage}>
       <div className={cl.contacts}>
         {isLoaded ? (
           items.map((item, index) => (
-            <Contact key={`${item.id}_${index}`} {...item} />
+            <Contact
+              key={`${item.id}_${index}`}
+              {...item}
+              handleDeleteContact={handleDeleteContact}
+              handleEditContact={handleEditContact}
+            />
           ))
         ) : (
           <CircularProgress />
