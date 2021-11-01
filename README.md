@@ -8,14 +8,12 @@
 - Поиск контакта
 
 ## Инструкция для запука приложения:
+- git clone (url репозитория)
+- cd contacts-admin
+- npm install
+- npm run dev
 
-### git clone (url репозитория)
-
-### cd contacts-admin
-
-### npm install
-
-### npm run dev
+### Логин: admin Пароль: admin
 
 ![Screenshot_1](https://user-images.githubusercontent.com/47324041/139703433-40ceb318-b9dc-415d-9a30-9e542c5eef40.png)
 ![Screenshot_2](https://user-images.githubusercontent.com/47324041/139703417-6abf38ca-04aa-4019-b33d-e28fc6428066.png)
